@@ -23,21 +23,14 @@ class PostController extends Controller
     public function search(Request $request)
     {
         $search = $request->get('search');
-        $posts = DB::table('posts')->where('name', 'like', '%' .$search.'%')->paginate(5);
+        $posts = DB::table('posts')->where('name', 'like', '%' .$search.'%')
+            ->orWhere('coursework', 'like', '%' .$search.'%')
+            ->orWhere('supervisor', 'like', '%' .$search.'%')
+            ->paginate(5);
         return view('index', ['posts' => $posts]);
     }
-    public function searchByCoursework(Request $request)
-    {
-        $search = $request->get('search');
-        $posts = DB::table('posts')->where('coursework', 'like', '%' .$search.'%')->paginate(5);
-        return view('index', ['posts' => $posts]);
-    }
-    public function searchBySupervisor(Request $request)
-    {
-        $search = $request->get('search');
-        $posts = DB::table('posts')->where('supervisor', 'like', '%' .$search.'%')->paginate(5);
-        return view('index', ['posts' => $posts]);
-    }
+
+
 
 
     public function store(Request $request)

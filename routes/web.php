@@ -13,6 +13,5 @@
 
 Route::get('/', 'PostController@index');
 Route::get('/search', 'PostController@search');
-Route::get('/search', 'PostController@searchByCoursework');
-Route::get('/search', 'PostController@searchBySupervisor');
 Route::resource('posts', 'PostController');
+
