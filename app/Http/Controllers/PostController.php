@@ -20,6 +20,13 @@ class PostController extends Controller
         return view('create');
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $posts = DB::table('posts')->where('name', 'like', '%' .$search.'%')->paginate(5);
+        return view('index', ['posts' => $posts]);
+    }
+
 
     public function store(Request $request)
     {
