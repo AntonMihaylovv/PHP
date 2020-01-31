@@ -45,18 +45,31 @@ class PostController extends Controller
 
     public function edit($id)
     {
-        //
+        $posts = DB::select('select * from posts where id=?', [$id]);
+        return view('edit', ['posts' => $posts]);
     }
 
 
     public function update(Request $request, $id)
     {
-        //
+        $name = $request ->get('name');
+        $coursework = $request->get('coursework');
+        $supervisor = $request->get('supervisor');
+        $posts = DB::update('update posts set name=?, coursework=?, supervisor=? where id=?', [$name, $coursework,$supervisor,$id]);
+
+        if ($posts){
+            $red = redirect('posts')->with('success','Student has been updated');
+        }else{
+            $red = redirect('posts/edit/', $id)->with('danger', 'Error updating, please try again');
+        }
+        return $red;
     }
 
 
     public function destroy($id)
     {
-        //
+        $posts = DB::delete('delete from posts where id=?', [$id]);
+        $red = redirect('posts');
+        return $red;
     }
 }
