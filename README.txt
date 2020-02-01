@@ -1,0 +1,1 @@
+This is a student graduation system.It is used to store and process student, coursework and supervisor data.You can search by student,supervisor or coursework topic.
